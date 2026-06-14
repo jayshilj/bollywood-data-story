@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Business of Bollywood</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rozha+One&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #1a0d12;
+    --ink: #f6ead7;
+  }
+  body {
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: "DM Sans", sans-serif;
+    margin: 0;
+    padding: 20px;
+  }
+  .wrap {
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="eyebrow">Jayshil's Analytics · A data story</div>
+    <h1>The business of Bollywood</h1>
+    <p class="lede">There are three ways to follow the money in Hindi cinema, and this page takes all of them.</p>
+  </header>
+
+  <section class="panel" id="years">
+    <h2>Bollywood by the years</h2>
+    <div class="chart-card">
+      <svg id="yChart" viewBox="0 0 1000 560"></svg>
+    </div>
+  </section>
+
+  <section class="panel" id="recovered">
+    <h2>By % of budget recovered</h2>
+    <div class="chart-card">
+      <svg id="rChart" viewBox="0 0 1000 620"></svg>
+    </div>
+  </section>
+
+  <section class="panel" id="losers">
+    <h2>Bollywood's biggest losers</h2>
+    <div class="chart-card">
+      <svg id="lChart" viewBox="0 0 1000 560"></svg>
+    </div>
+  </section>
+</div>
+</body>
+</html>
