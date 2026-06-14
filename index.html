@@ -447,6 +447,8 @@
     legend.appendChild(b);
   });
   const trendBtn=document.getElementById("rTrendBtn");
+  trendBtn.setAttribute("title", "Toggle the log-scale regression line");
+  trendBtn.setAttribute("aria-label", "Toggle regression trend line");
   trendBtn.onclick=()=>{showTrend=!showTrend;trendBtn.setAttribute("aria-pressed",showTrend);render();};
 
   const gGrid=el("g",{class:"grid"}),gZone=el("g"),gAxis=el("g",{class:"axis"}),gTrend=el("g"),gBub=el("g");
