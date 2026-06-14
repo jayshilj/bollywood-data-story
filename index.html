@@ -435,6 +435,8 @@
   GENRES.forEach(g=>{
     const b=document.createElement("button");
     b.className="chip"; b.setAttribute("aria-pressed","true");
+    b.setAttribute("title", `Toggle ${g.key} films`);
+    b.setAttribute("aria-label", `Filter by ${g.key}`);
     b.innerHTML=`<span class="dot" style="background:${g.c}"></span>${g.key}`;
     b.onclick=()=>{
       if(active.has(g.key)){active.delete(g.key);b.setAttribute("aria-pressed","false");}
