@@ -342,6 +342,152 @@
   }
   render();
 })();
+
+/* ====================================================================
+   PANEL 2 : PERCENT OF BUDGET RECOVERED
+   ==================================================================== */
+(function(){
+  const NS="http://www.w3.org/2000/svg";
+  const el=(n,a={})=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;};
+  const svg=document.getElementById("rChart");
+  const tip=document.getElementById("rTip");
+  const card=()=>document.querySelector("#recovered .chart-card").getBoundingClientRect();
+
+  const DATA=[
+    {f:"Bheja Fry", y:2007, b:0.6, g:12.6, gen:"Comedy", v:"Word of mouth turned a ₹60 lakh comedy into a 21 times return. The poster child for this whole chart."},
+    {f:"Hum Aapke Hain Koun!", y:1994, b:5, g:135, gen:"Romance", v:"The home-video-era juggernaut; a wedding album that ran over a year."},
+    {f:"Dilwale Dulhania Le Jayenge", y:1995, b:4, g:130, gen:"Romance", v:"Still playing decades on. The 32× romance every love story chases."},
+    {f:"Kaho Naa Pyaar Hai", y:2000, b:6, g:80, gen:"Romance", v:"Launched Hrithik Roshan overnight; a debut that printed money."},
+    {f:"Gadar: Ek Prem Katha", y:2001, b:18, g:133, gen:"Action", v:"A patriotic blockbuster that out-ran films twice its budget."},
+    {f:"Munna Bhai M.B.B.S.", y:2003, b:10, g:35, gen:"Comedy", v:"A modest gross but a sturdy multiple, and a much loved franchise grew out of it."},
+    {f:"Taare Zameen Par", y:2007, b:12, g:135, gen:"Drama", v:"Aamir Khan's directorial debut; a tender drama at a clean 11×."},
+    {f:"A Wednesday", y:2008, b:3, g:16.2, gen:"Thriller", v:"A taut ₹3cr thriller that punched far above its weight at 5×."},
+    {f:"Om Shanti Om", y:2007, b:40, g:240, gen:"Drama", v:"Big budget, bigger spectacle, Shah Rukh Khan at full wattage."},
+    {f:"Pyaar Ka Punchnama", y:2011, b:4, g:18, gen:"Comedy", v:"A no-star ensemble comedy that became a cult cash machine."},
+    {f:"Tanu Weds Manu", y:2011, b:18, g:56, gen:"Comedy", v:"The small-town rom-com that quietly launched a hit franchise."},
+    {f:"Vicky Donor", y:2012, b:5, g:65, gen:"Comedy", v:"A sperm donation comedy made on a shoestring. This became Ayushmann Khurrana's calling card."},
+    {f:"Kahaani", y:2012, b:8, g:104, gen:"Thriller", v:"Guerrilla-shot on Kolkata's streets; a 13× thriller built on buzz."},
+    {f:"Paan Singh Tomar", y:2012, b:7, g:20.2, gen:"Drama", v:"A biopic of an athlete-turned-rebel; National Award winner, tidy return."},
+    {f:"Aashiqui 2", y:2013, b:12, g:85, gen:"Romance", v:"A soundtrack that wouldn't quit carried it to a 7× return."},
+    {f:"The Lunchbox", y:2013, b:7, g:100, gen:"Drama", v:"An arthouse charmer that travelled the festival circuit and cashed in."},
+    {f:"Queen", y:2014, b:13, g:108, gen:"Comedy", v:"A solo-honeymoon coming-of-age tale; Kangana Ranaut's breakout."},
+    {f:"Tanu Weds Manu Returns", y:2015, b:40, g:255, gen:"Comedy", v:"The rare sequel that dwarfed the original, and the first ₹100cr net film of its year."},
+    {f:"Dangal", y:2016, b:70, g:2024, gen:"Drama", v:"The highest grossing Indian film ever, with roughly ₹1,300cr coming from China alone. A 29 times giant."},
+    {f:"Secret Superstar", y:2017, b:15, g:966, gen:"Drama", v:"The return king. A ₹15cr drama that pulled around ₹750cr in China for a 64 times recovery."},
+    {f:"Newton", y:2017, b:7, g:22, gen:"Drama", v:"A wry election satire; India's Oscar entry, profitable on a small spend."},
+    {f:"Stree", y:2018, b:24, g:180, gen:"Horror-Comedy", v:"A horror-comedy sleeper that spawned a whole shared universe."},
+    {f:"Badhaai Ho", y:2018, b:29, g:220, gen:"Comedy", v:"A mid-life-pregnancy comedy that out-earned far flashier rivals."},
+    {f:"Andhadhun", y:2018, b:32, g:456, gen:"Thriller", v:"A blind-pianist thriller that became a ₹340cr sensation in China."},
+    {f:"Uri: The Surgical Strike", y:2019, b:25, g:359, gen:"Action", v:"\"How's the josh?\" A patriotic war film that detonated at 14 times its cost."},
+    {f:"Kabir Singh", y:2019, b:60, g:379, gen:"Romance", v:"Polarising and unstoppable; a remake that cleared a 6× return."},
+    {f:"The Kashmir Files", y:2022, b:25, g:340, gen:"Drama", v:"A low-budget drama propelled by controversy and word of mouth."},
+    {f:"Drishyam 2", y:2022, b:50, g:340, gen:"Thriller", v:"A patient thriller sequel that beat pandemic-era expectations."},
+    {f:"Stree 2", y:2024, b:60, g:874, gen:"Horror-Comedy", v:"The horror comedy universe pays off. One of the biggest Hindi hits ever."},
+    {f:"Munjya", y:2024, b:30, g:132, gen:"Horror-Comedy", v:"A creature-comedy gamble that quietly cleared a tidy multiple."},
+  ];
+  DATA.forEach(d=>d.pct=d.g/d.b*100);
+
+  const GENRES=[
+    {key:"Romance",c:"#e63e6d"},{key:"Comedy",c:"#e8b84b"},{key:"Drama",c:"#f2884b"},
+    {key:"Thriller",c:"#3aafa9"},{key:"Action",c:"#e8553e"},{key:"Horror-Comedy",c:"#a96fd0"},
+  ];
+  const cOf=g=>(GENRES.find(x=>x.key===g)||{c:"#999"}).c;
+  DATA.forEach(d=>d.color=cOf(d.gen));
+  const LABELLED=new Set(["Secret Superstar","Dangal","Dilwale Dulhania Le Jayenge","Bheja Fry","Andhadhun","Hum Aapke Hain Koun!"]);
+
+  let showTrend=true;
+  const active=new Set(GENRES.map(g=>g.key));
+
+  const W=1000,H=620,M={t:40,r:34,b:60,l:72};
+  const IW=W-M.l-M.r, IH=H-M.t-M.b;
+  const bMin=0.5,bMax=85,pMin=250,pMax=7000,L=Math.log10;
+  const xS=b=>M.l+(L(b)-L(bMin))/(L(bMax)-L(bMin))*IW;
+  const yS=p=>M.t+IH-(L(p)-L(pMin))/(L(pMax)-L(pMin))*IH;
+  const rS=g=>5+Math.sqrt(g)/Math.sqrt(2024)*30;
+
+  function fit(){
+    const xs=DATA.map(d=>L(d.b)),ys=DATA.map(d=>L(d.pct)),N=xs.length;
+    const sx=xs.reduce((p,c)=>p+c,0),sy=ys.reduce((p,c)=>p+c,0);
+    const sxx=xs.reduce((p,c)=>p+c*c,0),sxy=xs.reduce((p,c,i)=>p+c*ys[i],0);
+    const b=(N*sxy-sx*sy)/(N*sxx-sx*sx),a=(sy-b*sx)/N; return {a,b};
+  }
+  const TR=fit(), trendY=b=>Math.pow(10,TR.a+TR.b*L(b));
+
+  const legend=document.getElementById("rLegend");
+  GENRES.forEach(g=>{
+    const b=document.createElement("button");
+    b.className="chip"; b.setAttribute("aria-pressed","true");
+    b.innerHTML=`<span class="dot" style="background:${g.c}"></span>${g.key}`;
+    b.onclick=()=>{
+      if(active.has(g.key)){active.delete(g.key);b.setAttribute("aria-pressed","false");}
+      else{active.add(g.key);b.setAttribute("aria-pressed","true");}
+      if(active.size===0){GENRES.forEach(x=>active.add(x.key));[...legend.children].forEach(c=>c.setAttribute("aria-pressed","true"));}
+      render();
+    };
+    legend.appendChild(b);
+  });
+  const trendBtn=document.getElementById("rTrendBtn");
+  trendBtn.onclick=()=>{showTrend=!showTrend;trendBtn.setAttribute("aria-pressed",showTrend);render();};
+
+  const gGrid=el("g",{class:"grid"}),gZone=el("g"),gAxis=el("g",{class:"axis"}),gTrend=el("g"),gBub=el("g");
+  svg.append(gGrid,gZone,gAxis,gTrend,gBub);
+
+  function drawStatic(){
+    gGrid.innerHTML="";gAxis.innerHTML="";gZone.innerHTML="";
+    const zy=yS(2000);
+    gZone.append(el("rect",{class:"breakzone",x:M.l,y:M.t,width:IW,height:zy-M.t}));
+    const zt=el("text",{class:"breaklabel",x:M.l+10,y:M.t+15}); zt.textContent="Graph-breakers · 20×+ recovered"; gZone.append(zt);
+    [1,2,5,10,20,50].forEach(b=>{
+      const xx=xS(b);
+      gGrid.append(el("line",{class:"major",x1:xx,x2:xx,y1:M.t,y2:M.t+IH}));
+      const tx=el("text",{x:xx,y:H-M.b+24,"text-anchor":"middle"}); tx.textContent="₹"+b+"cr"; gAxis.append(tx);
+    });
+    [300,500,1000,2000,5000].forEach(p=>{
+      const yy=yS(p);
+      gGrid.append(el("line",{x1:M.l,x2:W-M.r,y1:yy,y2:yy}));
+      const tx=el("text",{x:M.l-10,y:yy+4,"text-anchor":"end"}); tx.textContent=p.toLocaleString()+"%"; gAxis.append(tx);
+    });
+    const yt=el("text",{class:"axis-title","text-anchor":"middle",transform:`translate(16,${M.t+IH/2}) rotate(-90)`}); yt.textContent="Budget recovered (%)"; gAxis.append(yt);
+    const xt=el("text",{class:"axis-title","text-anchor":"middle",x:M.l+IW/2,y:H-6}); xt.textContent="Production budget (₹ crore)"; gAxis.append(xt);
+  }
+  function drawTrend(){
+    gTrend.innerHTML="";
+    const x1=bMin*1.1,x2=bMax*0.95;
+    gTrend.append(el("path",{class:"trend"+(showTrend?"":" off"),d:`M ${xS(x1)} ${yS(trendY(x1))} L ${xS(x2)} ${yS(trendY(x2))}`}));
+    const nx=42;
+    const nt=el("text",{class:"trend-note"+(showTrend?"":" off"),x:xS(nx)+6,y:yS(trendY(nx))-8,"text-anchor":"start"}); nt.textContent="bigger budget → smaller % back"; gTrend.append(nt);
+  }
+  let nodes=[];
+  function buildBubbles(){
+    gBub.innerHTML="";nodes=[];
+    [...DATA].sort((a,b)=>b.g-a.g).forEach(d=>{
+      const grp=el("g");
+      const c=el("circle",{class:"bubble",cx:xS(d.b),cy:yS(d.pct),r:rS(d.g),fill:d.color,"fill-opacity":.8,stroke:d.color,"stroke-opacity":.95,"stroke-width":1.2});
+      grp.append(c);
+      if(LABELLED.has(d.f)){
+        const short=d.f.replace("Dilwale Dulhania Le Jayenge","DDLJ").replace("Hum Aapke Hain Koun!","HAHK");
+        const t1=el("text",{class:"blabel","text-anchor":"middle"}); t1.textContent=short;
+        const t2=el("text",{class:"blabel sub","text-anchor":"middle"}); t2.textContent=Math.round(d.pct).toLocaleString()+"%";
+        const off=rS(d.g)+13;
+        t1.setAttribute("x",xS(d.b)); t1.setAttribute("y",yS(d.pct)-off+2);
+        t2.setAttribute("x",xS(d.b)); t2.setAttribute("y",yS(d.pct)-off+13);
+        grp.append(t1,t2); d._t1=t1; d._t2=t2;
+      }
+      d._g=grp; d._c=c;
+      gBub.append(grp); nodes.push(d);
+    });
+  }
+  function render(){
+    drawStatic(); drawTrend();
+    nodes.forEach(d=>{
+      const vis=active.has(d.gen);
+      d._g.classList.toggle("hidden",!vis);
+      if(d._t1){d._t1.style.display=vis?"":"none";d._t2.style.display=vis?"":"none";}
+    });
+  }
+
+  buildBubbles(); render();
+})();
 </script>
 </body>
 </html>
