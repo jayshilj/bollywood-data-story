@@ -142,32 +142,206 @@
 </head>
 <body>
 <div class="wrap">
-  <header class="masthead">
+
+  <div class="masthead">
     <div class="eyebrow">Jayshil's Analytics · A data story</div>
-    <h1>The business of Bollywood</h1>
-    <p class="lede">There are three ways to follow the money in Hindi cinema, and this page takes all of them.</p>
-  </header>
+    <h1>The business of <span class="accent">Bollywood</span></h1>
+    <p class="lede">There are three ways to follow the money in Hindi cinema, and this page takes all of them. We start with how the whole industry has moved year by year, from a near death during the pandemic to a record breaking comeback. Then we zoom in on a single film and ask why the cheapest movies so often hand back the fattest returns. We finish with the part nobody puts on a poster: the big budget bets that lost a fortune.</p>
+    <nav class="nav">
+      <a href="#years"><span class="num">01</span>Bollywood by the years</a>
+      <a href="#recovered"><span class="num">02</span>% of budget recovered</a>
+      <a href="#losers"><span class="num">03</span>Biggest losers</a>
+    </nav>
+  </div>
 
+  <!-- ============== PANEL 1: BY THE YEARS ============== -->
   <section class="panel" id="years">
-    <h2>Bollywood by the years</h2>
-    <div class="chart-card">
-      <svg id="yChart" viewBox="0 0 1000 560"></svg>
+    <div class="panel-eyebrow">Chart <b>01</b> · the industry over time</div>
+    <h2>Bollywood <span class="accent">by the years</span></h2>
+    <p class="lede">Hindi cinema's yearly box office had climbed to a strong pre-pandemic peak. Then theatres shut in 2020 and it <b>fell to a fraction</b> of that. The recovery came slowly, carried mostly by South Indian films, and in 2025 the industry finally posted its <b>best year on record</b>. The gold bars are Hindi cinema. The line behind them is the all India box office.</p>
+
+    <div class="controls">
+      <div>
+        <div class="ctl-label">Show</div>
+        <div class="toggle" role="group" aria-label="Choose metric">
+          <button id="y-gross" aria-pressed="true">Box office ₹cr</button>
+          <button id="y-share" aria-pressed="false">Hindi's share %</button>
+        </div>
+      </div>
+      <div class="keys">
+        <span class="key"><span class="sq"></span>Hindi cinema</span>
+        <span class="key" id="yLineKey"><span class="ln"></span>All-India box office</span>
+      </div>
     </div>
+
+    <div class="hint">Source: Ormax Box Office Reports (gross collections, India). Roll over any year for detail.</div>
+
+    <div class="chart-card">
+      <svg id="yChart" viewBox="0 0 1000 560" role="img" aria-label="Bar chart of Hindi cinema annual box office 2019 to 2025 with all-India total as a line"></svg>
+      <div class="tip" id="yTip"></div>
+    </div>
+
+    <p class="note">The 2020 and 2021 seasons wiped out roughly 80 percent of theatrical revenue almost overnight. What pulled the business back from 2022 to 2024 was largely South Indian cinema, not Hindi. In 2024, about 31 percent of so called Hindi collections were actually dubbed South films, and original Hindi revenue fell 37 percent. The 2025 record was the first genuine Hindi comeback of the cycle. A note on the figures: these are Ormax gross collection estimates. The 2019 and 2022 Hindi values are derived from Ormax language share data, and the 2020 to 2021 Hindi values are estimates that sit inside the sourced all India totals.</p>
   </section>
 
+  <!-- ============== PANEL 2: % BUDGET RECOVERED ============== -->
   <section class="panel" id="recovered">
-    <h2>By % of budget recovered</h2>
-    <div class="chart-card">
-      <svg id="rChart" viewBox="0 0 1000 620"></svg>
+    <div class="panel-eyebrow">Chart <b>02</b> · the economics of one film</div>
+    <h2>By <span class="accent">% of budget recovered</span></h2>
+    <p class="lede">Put every film on a chart by what it cost and how much of that cost it earned back, and the winners all huddle in one corner. <b>Small budgets recover the most.</b> The reason is almost boringly simple: a tiny outlay is easy to multiply many times over. A ₹0.6cr comedy can hand back more, in percentage terms, than a ₹70cr epic. Colour is the genre. Bubble size is the worldwide gross.</p>
+
+    <div class="controls">
+      <div>
+        <div class="ctl-label">Filter by genre (tap to toggle)</div>
+        <div class="legend" id="rLegend"></div>
+      </div>
+      <div>
+        <div class="ctl-label">Reveal</div>
+        <button class="trendbtn" id="rTrendBtn" aria-pressed="true"><span style="display:inline-block;width:14px;height:0;border-top:2px dashed var(--gold)"></span>Trend line</button>
+      </div>
     </div>
+
+    <div class="hint">X is budget (₹ cr, log scale). Y is the percentage of budget recovered (log scale). Up and to the left means the best return. Roll over any bubble for the film.</div>
+
+    <div class="chart-card">
+      <svg id="rChart" viewBox="0 0 1000 620" role="img" aria-label="Log-log scatter of Bollywood films by budget and percentage of budget recovered, coloured by genre"></svg>
+      <div class="tip" id="rTip"></div>
+    </div>
+
+    <p class="note">The trend line slopes down. Very roughly, every tenfold jump in budget halves the percentage you get back. The films sitting up top (<b>Secret Superstar, DDLJ, Dangal, Bheja Fry</b>) are the rare ones that beat that curve. One caveat worth stating plainly: Bollywood budgets and grosses are murky and often disputed between trade sources, so treat these as widely cited estimates (Wikipedia, Box Office India, Koimoi) rather than audited books. The grosses for Dangal, Secret Superstar and Andhadhun are inflated by huge runs in China, and none of these budgets include marketing.</p>
   </section>
 
+  <!-- ============== PANEL 3: BIGGEST LOSERS ============== -->
   <section class="panel" id="losers">
-    <h2>Bollywood's biggest losers</h2>
-    <div class="chart-card">
-      <svg id="lChart" viewBox="0 0 1000 560"></svg>
+    <div class="panel-eyebrow">Chart <b>03</b> · the other side of the ledger</div>
+    <h2>Bollywood's <span class="accent">biggest losers</span></h2>
+    <p class="lede">For every film that prints money, the industry quietly buries one that doesn't. Budgets have ballooned, break even points now sit somewhere past <b>₹300 to ₹400 crore</b>, and plenty of the biggest bets never get close. These are the Hindi films that recovered the least of what they cost. The <b>gold</b> shows what came back. The <b>red</b> shows what didn't.</p>
+
+    <div class="controls">
+      <div>
+        <div class="ctl-label">Show</div>
+        <div class="toggle" role="group" aria-label="Choose metric">
+          <button id="l-pct" aria-pressed="true">% recovered</button>
+          <button id="l-abs" aria-pressed="false">₹ crore</button>
+        </div>
+      </div>
     </div>
+
+    <div class="hint">Sorted by estimated loss. Roll over any film for detail. An asterisk marks a pan-India release.</div>
+
+    <div class="chart-card">
+      <svg id="lChart" viewBox="0 0 1000 560" role="img" aria-label="Horizontal bar chart of Bollywood's biggest box office losers by percent of budget recovered"></svg>
+      <div class="tip" id="lTip"></div>
+    </div>
+
+    <p class="note">Here is the catch that sinks a lot of headline numbers: worldwide gross is not profit. Theatres, taxes and distributors take roughly half before a single rupee reaches the producer. So a film can look like it earned back most of its budget on paper and still lose money. Thugs of Hindostan actually grossed more than its budget of around ₹300 crore and was still a disaster. Loss here is simply budget minus worldwide gross, which is a directional estimate rather than a precise figure. The budgets and grosses are disputed trade numbers, and marketing spend, often as large again as the budget, would push every loss on this chart deeper into the red.</p>
   </section>
+
+  <footer>
+    <p class="note">A three part look at the money behind Hindi cinema: how the industry has moved year to year, why small films win on return, and how much gets lost when the big bets miss. Inspired by the Information Is Beautiful piece on the most successful Hollywood movie of all time.</p>
+    <div class="brand">Jayshil's&nbsp;<span class="g">Analytics</span><br>The business of Bollywood</div>
+  </footer>
 </div>
+
+<script>
+/* ====================================================================
+   PANEL 1 : BOLLYWOOD BY THE YEARS
+   ==================================================================== */
+(function(){
+  const NS="http://www.w3.org/2000/svg";
+  const el=(n,a={})=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;};
+  const svg=document.getElementById("yChart");
+  const tip=document.getElementById("yTip");
+  const card=()=>document.querySelector("#years .chart-card").getBoundingClientRect();
+
+  const DATA=[
+    {yr:2019, hindi:4800, total:10948, est:true,  top:"War", topG:475},
+    {yr:2020, hindi:450,  total:2056,  est:true,  top:"Tanhaji", topG:368},
+    {yr:2021, hindi:800,  total:3700,  est:true,  top:"Sooryavanshi", topG:294},
+    {yr:2022, hindi:3510, total:10637, est:true,  top:"Brahmāstra", topG:431},
+    {yr:2023, hindi:5380, total:12226, est:false, top:"Jawan", topG:1160},
+    {yr:2024, hindi:4679, total:11833, est:false, top:"Stree 2", topG:874},
+    {yr:2025, hindi:5504, total:13395, est:false, top:"Chhaava", topG:808},
+  ];
+  DATA.forEach(d=>d.share=d.hindi/d.total*100);
+
+  let metric="gross";
+  const W=1000,H=560,M={t:44,r:40,b:54,l:64};
+  const IW=W-M.l-M.r, IH=H-M.t-M.b;
+  const n=DATA.length, band=IW/n, bw=band*0.46;
+  const xC=i=>M.l+band*i+band/2;
+  const yMax=()=>metric==="gross"?14000:50;
+  const yS=v=>M.t+IH-(v/yMax())*IH;
+  const barVal=d=>metric==="gross"?d.hindi:d.share;
+
+  const defs=el("defs");
+  defs.innerHTML=`<linearGradient id="yBarGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f4cd6b"/><stop offset="100%" stop-color="#d99f33"/></linearGradient>`;
+  const gGrid=el("g",{class:"grid"}),gCovid=el("g"),gAxis=el("g",{class:"axis"}),gBars=el("g"),gLine=el("g"),gAnno=el("g");
+  svg.append(defs,gGrid,gCovid,gAxis,gBars,gLine,gAnno);
+
+  function drawStatic(){
+    gGrid.innerHTML="";gAxis.innerHTML="";gCovid.innerHTML="";
+    const ticks=metric==="gross"?[0,2000,4000,6000,8000,10000,12000,14000]:[0,10,20,30,40,50];
+    ticks.forEach(t=>{
+      const yy=yS(t);
+      gGrid.append(el("line",{x1:M.l,x2:W-M.r,y1:yy,y2:yy}));
+      const tx=el("text",{x:M.l-10,y:yy+4,"text-anchor":"end"});
+      tx.textContent=metric==="gross"?(t===0?"0":(t/1000)+"k"):(t+"%");
+      gAxis.append(tx);
+    });
+    DATA.forEach((d,i)=>{const tx=el("text",{class:"yearlbl",x:xC(i),y:H-M.b+24,"text-anchor":"middle"});tx.textContent=d.yr;gAxis.append(tx);});
+    const yt=el("text",{class:"axis-title","text-anchor":"middle",transform:`translate(15,${M.t+IH/2}) rotate(-90)`});
+    yt.textContent=metric==="gross"?"Gross box office (₹ crore)":"Hindi share of all-India BO"; gAxis.append(yt);
+    // COVID band
+    const x0=M.l+band*1+band*0.04, x1=M.l+band*3-band*0.04;
+    gCovid.append(el("rect",{class:"covid-band",x:x0,y:M.t,width:x1-x0,height:IH}));
+    const cl=el("text",{class:"covid-lbl",x:(x0+x1)/2,y:M.t+IH-10}); cl.textContent="Theatres shut · COVID-19"; gCovid.append(cl);
+  }
+  function drawBars(){
+    gBars.innerHTML="";
+    DATA.forEach((d,i)=>{
+      const v=barVal(d),yy=yS(v),h=M.t+IH-yy,x=xC(i)-bw/2;
+      const r=el("rect",{class:"bar",x:x,y:yy,width:bw,height:Math.max(h,0),rx:4,fill:"url(#yBarGrad)"});
+      r.style.transformOrigin=`${x}px ${M.t+IH}px`;
+      r.style.animation=`grow .7s cubic-bezier(.22,1,.36,1) ${i*0.06}s both`;
+      gBars.append(r);
+      const lab=el("text",{class:"barval",x:xC(i),y:yy-8});
+      lab.textContent=metric==="gross"?d.hindi.toLocaleString():Math.round(d.share)+"%";
+      gBars.append(lab);
+    });
+  }
+  function drawLine(){
+    gLine.innerHTML="";
+    const hide=metric!=="gross";
+    const pts=DATA.map((d,i)=>[xC(i),yS(d.total)]);
+    gLine.append(el("path",{class:"totline"+(hide?" hideline":""),d:"M "+pts.map(p=>p[0]+" "+p[1]).join(" L ")}));
+    DATA.forEach((d,i)=>{
+      gLine.append(el("circle",{class:"totdot"+(hide?" hideline":""),cx:xC(i),cy:yS(d.total),r:4}));
+      const tv=el("text",{class:"totval"+(hide?" hideline":""),x:xC(i),y:yS(d.total)-10}); tv.textContent=d.total.toLocaleString(); gLine.append(tv);
+    });
+  }
+  function star(cx,cy,r){let p="";for(let k=0;k<10;k++){const a=-Math.PI/2+k*Math.PI/5,rr=k%2?r*0.45:r;p+=(cx+rr*Math.cos(a))+","+(cy+rr*Math.sin(a))+" ";}return el("polygon",{class:"star",points:p.trim()});}
+  function drawAnno(){
+    gAnno.innerHTML="";
+    if(metric!=="gross")return;
+    [[4,"₹5,000cr first"],[6,"Best year ever"]].forEach(([i,txt])=>{
+      const d=DATA[i],cx=xC(i),cy=yS(d.hindi);
+      gAnno.append(star(cx,cy-26,7));
+      const t=el("text",{class:"annote",x:cx,y:cy-36}); t.textContent=txt; gAnno.append(t);
+    });
+  }
+  function render(){drawStatic();drawBars();drawLine();drawAnno();}
+
+  document.getElementById("y-gross").onclick=()=>{metric="gross";setT();};
+  document.getElementById("y-share").onclick=()=>{metric="share";setT();};
+  function setT(){
+    document.getElementById("y-gross").setAttribute("aria-pressed",metric==="gross");
+    document.getElementById("y-share").setAttribute("aria-pressed",metric==="share");
+    document.getElementById("yLineKey").style.opacity=metric==="gross"?"1":"0.25";
+    render();
+  }
+  render();
+})();
+</script>
 </body>
 </html>
