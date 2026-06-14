@@ -612,8 +612,10 @@
   document.getElementById("l-pct").onclick=()=>{mode="pct";setT();};
   document.getElementById("l-abs").onclick=()=>{mode="abs";setT();};
   function setT(){
-    document.getElementById("l-pct").setAttribute("aria-pressed",mode==="pct");
-    document.getElementById("l-abs").setAttribute("aria-pressed",mode==="abs");
+    const btnPct = document.getElementById("l-pct");
+    const btnAbs = document.getElementById("l-abs");
+    btnPct.setAttribute("aria-pressed", mode === "pct");
+    btnAbs.setAttribute("aria-pressed", mode === "abs");
     draw();
   }
   function showTip(e,d){
