@@ -304,6 +304,8 @@
       const r=el("rect",{class:"bar",x:x,y:yy,width:bw,height:Math.max(h,0),rx:4,fill:"url(#yBarGrad)"});
       r.style.transformOrigin=`${x}px ${M.t+IH}px`;
       r.style.animation=`grow .7s cubic-bezier(.22,1,.36,1) ${i*0.06}s both`;
+      r.addEventListener("mousemove",e=>showTip(e,d));
+      r.addEventListener("mouseleave",hideTip);
       gBars.append(r);
       const lab=el("text",{class:"barval",x:xC(i),y:yy-8});
       lab.textContent=metric==="gross"?d.hindi.toLocaleString():Math.round(d.share)+"%";
@@ -331,6 +333,20 @@
     });
   }
   function render(){drawStatic();drawBars();drawLine();drawAnno();}
+
+  function showTip(e,d){
+    const c=card(),x=e.clientX-c.left,y=e.clientY-c.top;
+    tip.innerHTML=`<h4 class="big">${d.yr}${d.est?' <span style="font-size:11px;color:var(--ink-faint)">est.</span>':''}</h4>
+      <dl><dt>Hindi cinema</dt><dd class="gold">₹${d.hindi.toLocaleString()} cr</dd>
+      <dt>All-India total</dt><dd class="teal">₹${d.total.toLocaleString()} cr</dd>
+      <dt>Hindi share</dt><dd>${Math.round(d.share)}%</dd></dl>
+      <div class="top">Biggest Hindi film: <b>${d.top}</b>, which made ₹${d.topG} cr worldwide</div>`;
+    tip.style.opacity="1";tip.style.transform="translateY(0)";
+    const tw=tip.offsetWidth,th=tip.offsetHeight;let px=x+16,py=y-th-12;
+    if(px+tw>c.width)px=x-tw-16; if(py<0)py=y+18;
+    tip.style.left=px+"px";tip.style.top=py+"px";
+  }
+  function hideTip(){tip.style.opacity="0";tip.style.transform="translateY(4px)";}
 
   document.getElementById("y-gross").onclick=()=>{metric="gross";setT();};
   document.getElementById("y-share").onclick=()=>{metric="share";setT();};
@@ -474,6 +490,9 @@
         grp.append(t1,t2); d._t1=t1; d._t2=t2;
       }
       d._g=grp; d._c=c;
+      grp.addEventListener("mousemove",e=>showTip(e,d));
+      grp.addEventListener("mouseenter",()=>{nodes.forEach(nn=>nn._c.classList.add("dim"));d._c.classList.remove("dim");});
+      grp.addEventListener("mouseleave",()=>{hideTip();nodes.forEach(nn=>nn._c.classList.remove("dim"));});
       gBub.append(grp); nodes.push(d);
     });
   }
@@ -485,6 +504,18 @@
       if(d._t1){d._t1.style.display=vis?"":"none";d._t2.style.display=vis?"":"none";}
     });
   }
+  function showTip(e,d){
+    const c=card(),x=e.clientX-c.left,y=e.clientY-c.top;
+    tip.innerHTML=`<h4>${d.f}</h4><div class="yr">${d.y} · <span class="gpill">${d.gen}</span></div>
+      <dl><dt>Budget</dt><dd>₹${d.b} cr</dd><dt>Worldwide gross</dt><dd>₹${d.g.toLocaleString()} cr</dd>
+      <dt>Recovered</dt><dd class="roi">${Math.round(d.pct).toLocaleString()}% &nbsp;(${(d.pct/100).toFixed(1)}×)</dd></dl>
+      <div class="verdict">${d.v}</div>`;
+    tip.style.opacity="1";tip.style.transform="translateY(0)";
+    const tw=tip.offsetWidth,th=tip.offsetHeight;let px=x+18,py=y-th-12;
+    if(px+tw>c.width)px=x-tw-18; if(py<0)py=y+18;
+    tip.style.left=px+"px";tip.style.top=py+"px";
+  }
+  function hideTip(){tip.style.opacity="0";tip.style.transform="translateY(4px)";}
 
   buildBubbles(); render();
 })();
@@ -560,6 +591,8 @@
       gRows.append(el("rect",{class:"lgross",x:M.l,y:y,width:Math.max(gross,1.5),height:bh,rx:3}));
       const hit=el("rect",{x:M.l,y:yC(i)-rowH/2,width:IW,height:rowH,fill:"transparent"});
       hit.style.cursor="pointer";
+      hit.addEventListener("mousemove",e=>showTip(e,d));
+      hit.addEventListener("mouseleave",hideTip);
       gRows.append(hit);
       const nm=el("text",{class:"lname",x:M.l-14,y:yC(i)+4,"text-anchor":"end"});
       nm.textContent=d.f+(d.pan?" *":"");
@@ -577,6 +610,21 @@
     document.getElementById("l-abs").setAttribute("aria-pressed",mode==="abs");
     draw();
   }
+  function showTip(e,d){
+    const c=card(),x=e.clientX-c.left,y=e.clientY-c.top;
+    tip.innerHTML=`<h4>${d.f}${d.pan?' <span style="font-size:11px;color:var(--ink-faint)">pan-India</span>':''}</h4>
+      <div class="yr">${d.y} · Box-office bomb</div>
+      <dl><dt>Budget</dt><dd>₹${d.b} cr</dd>
+      <dt>Worldwide gross</dt><dd>₹${d.g.toLocaleString()} cr</dd>
+      <dt>Recovered</dt><dd class="roi">${Math.round(d.pct)}%</dd>
+      <dt>Est. loss</dt><dd style="color:#ea8a9a">−₹${d.loss} cr</dd></dl>
+      <div class="verdict">${d.v}</div>`;
+    tip.style.opacity="1";tip.style.transform="translateY(0)";
+    const tw=tip.offsetWidth,th=tip.offsetHeight;let px=x+16,py=y-th-12;
+    if(px+tw>c.width)px=x-tw-16; if(py<0)py=y+18;
+    tip.style.left=px+"px";tip.style.top=py+"px";
+  }
+  function hideTip(){tip.style.opacity="0";tip.style.transform="translateY(4px)";}
   draw();
 })();
 </script>
