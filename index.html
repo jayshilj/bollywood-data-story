@@ -351,9 +351,11 @@
   document.getElementById("y-gross").onclick=()=>{metric="gross";setT();};
   document.getElementById("y-share").onclick=()=>{metric="share";setT();};
   function setT(){
-    document.getElementById("y-gross").setAttribute("aria-pressed",metric==="gross");
-    document.getElementById("y-share").setAttribute("aria-pressed",metric==="share");
-    document.getElementById("yLineKey").style.opacity=metric==="gross"?"1":"0.25";
+    const btnGross = document.getElementById("y-gross");
+    const btnShare = document.getElementById("y-share");
+    btnGross.setAttribute("aria-pressed", metric === "gross");
+    btnShare.setAttribute("aria-pressed", metric === "share");
+    document.getElementById("yLineKey").style.opacity = metric === "gross" ? "1" : "0.25";
     render();
   }
   render();
