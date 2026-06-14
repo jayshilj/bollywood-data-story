@@ -138,7 +138,12 @@
 
   @media (max-width:640px){
     .blabel,.blabel.sub,.barval,.totval{display:none}
-    .controls{gap:16px 20px}.keys{gap:12px}
+    .controls{gap:16px 20px; flex-direction: column; align-items: flex-start;}
+    .keys{gap:12px; flex-wrap: wrap;}
+    .nav{gap:8px;}
+    .nav a{padding:7px 12px; font-size:11px;}
+    h2{font-size: 32px;}
+    .panel-eyebrow{letter-spacing: 0.18em;}
   }
   @media (prefers-reduced-motion:reduce){ *{transition:none!important} .bar{animation:none!important} }
 </style>
