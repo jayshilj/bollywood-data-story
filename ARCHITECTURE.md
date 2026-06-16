@@ -34,3 +34,7 @@ Each IIFE script handles hover coordinates locally using a bounding client rect 
 const c = card(), x = e.clientX - c.left, y = e.clientY - c.top;
 ```
 It computes boundary overlays (`tip.offsetWidth`/`tip.offsetHeight`) to prevent the tooltips from overflowing the view edges, translating positions seamlessly in log/linear layouts.
+
+## Future Extensibility Plan
+
+- **Static Data Fetching**: While the data is currently embedded directly in the script tags for immediate rendering speed and offline loading capability, future iterations can transition to dynamically parsing the local CSVs using a simple browser fetch and an inline CSV-to-JSON parser.
