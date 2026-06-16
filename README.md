@@ -54,6 +54,12 @@ python3 -m http.server 8000
 # then visit http://localhost:8000
 ```
 
+### Local Troubleshooting
+- **Port already in use**: If Python complains that port 8000 is occupied, launch the server on an alternate port (e.g. `python3 -m http.server 8080`).
+- **Browser Caching**: If updates to data don't appear in the browser, perform a hard refresh (`Ctrl + F5` on Windows or `Cmd + Shift + R` on macOS) to clear cached scripts.
+- **Python missing**: If `python3` isn't recognized, try `python -m http.server 8000` or double-click `index.html` to load it via the `file://` protocol.
+
+
 ## How it is built
 
 Plain HTML, CSS and vanilla JavaScript. The charts are hand drawn as SVG, so there are no chart libraries, no npm install and no dependencies to break. Each of the three charts runs in its own isolated scope on the page, so their toggles and filters never interfere with each other. Fonts load from Google Fonts. Everything else is in one file.
