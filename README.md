@@ -72,6 +72,20 @@ The raw numbers live in the `data` folder as CSV so anyone can check or reuse th
 - `budget_recovered.csv`
 - `biggest_losers.csv`
 
+### Adding or Updating Movie Data
+If you want to add a movie to the dataset (for example, to add it to the scatter plot in Chart 2):
+1. Open [data/budget_recovered.csv](data/budget_recovered.csv) in a text editor or spreadsheet program.
+2. Add a new row at the bottom with the following comma-separated values:
+   - `film`: Movie name (e.g. `My New Blockbuster`)
+   - `year`: Release year (e.g. `2026`)
+   - `budget_cr`: Production budget in ₹ crore
+   - `worldwide_gross_cr`: Worldwide gross box office in ₹ crore
+   - `genre`: Primary genre matching one of the existing keys (`Romance`, `Comedy`, `Drama`, `Thriller`, `Action`, `Horror-Comedy`)
+   - `pct_recovered`: Percentage calculated as `(worldwide_gross_cr / budget_cr) * 100` (e.g. `250` for 250% recovery)
+3. If the movie is also an outlier with a massive budget loss, you can add it to [data/biggest_losers.csv](data/biggest_losers.csv) in a similar fashion.
+4. Note that after updating the CSV, you will need to add the movie's dictionary node to the matching JavaScript `DATA` array inside `index.html` to update the rendered SVG charts.
+
+
 `data/SOURCES.md` explains where each figure comes from and, just as important, where the soft spots are. Indian box office data is messy. Budgets and grosses are rarely audited and trade sources often disagree, so treat everything here as a careful estimate rather than a final ledger. The short version of the caveats:
 
 - Worldwide gross is not profit. Theatres, taxes and distributors take roughly half before the producer sees a rupee.
