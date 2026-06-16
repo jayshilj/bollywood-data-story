@@ -11,8 +11,20 @@ Annual Hindi cinema box office from 2019 to 2025, with the all India total drawn
 ![Bollywood by the years](images/chart_years.png)
 
 ### 2. Percent of budget recovered
-Every film plotted by what it cost against how much of that cost it earned back, on log scales, coloured by genre and sized by gross. The pattern is blunt: the smaller the budget, the bigger the percentage return.
+Every film plotted by what it cost against how much of that cost it earned back, on log-log scales, coloured by genre and sized by gross. The pattern is blunt: the smaller the budget, the bigger the percentage return.
 ![Percent of budget recovered](images/chart_recovered.png)
+
+#### Interpretation Guide
+- **Logarithmic Scales**: Both axes are plotted using logarithmic values (base 10). This choice is critical: it prevents extreme successes (such as *Secret Superstar* which recovered over 6000% of its budget) from squishing the remaining movies into a single unreadable cluster at the bottom.
+- **Bubble Sizing**: The area of each movie node represents its worldwide gross box office collections. Larger bubbles represent high-grossing blockbusters, while smaller bubbles indicate lower overall revenue.
+- **Color-Coding**: Films are color-coded by their primary genre using a premium dark-background friendly HSL palette:
+  - **Comedy**: Gold/Yellow (`#e8b84b`)
+  - **Romance**: Rose/Pink (`#e63e6d`)
+  - **Drama**: Saffron/Orange (`#f2884b`)
+  - **Thriller**: Teal (`#3aafa9`)
+  - **Action**: Coral/Red (`#e8553e`)
+  - **Horror-Comedy**: Lavender/Purple (`#a96fd0`)
+
 
 ### 3. Biggest losers
 The other side of the ledger. A ranked list of the Hindi films that recovered the least of their cost, with gold showing what came back and red showing what did not.
