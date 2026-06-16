@@ -22,4 +22,36 @@ These are pulled from the most widely cited public figures for each title, cross
 3. **China inflates a few outliers.** Dangal, Secret Superstar and Andhadhun earned enormous sums in China, which is why their recovery rates tower over everything else.
 4. **Pan India titles.** Adipurush is marked separately because it was a multi language release led by a Telugu star, not a pure Hindi production.
 
+## CSV Data Schema
+
+To make onboarding and reuse simple, here is a description of the columns in each CSV file inside the `data/` folder:
+
+### 1. `box_office_by_year.csv`
+- `year`: The calendar year of release (e.g., `2019` to `2025`).
+- `hindi_cinema_cr`: Total box office gross for original and dubbed Hindi releases in India (₹ crore).
+- `all_india_cr`: Total domestic box office gross across all languages in India (₹ crore).
+- `hindi_share_pct`: The percentage share of Hindi cinema gross out of the All-India gross total.
+- `biggest_hindi_film`: The highest-grossing Hindi film worldwide of that year.
+- `film_worldwide_gross_cr`: Worldwide gross of the biggest Hindi film of that year (₹ crore).
+- `note`: Contextual notes on language share estimations.
+
+### 2. `budget_recovered.csv`
+- `film`: The title of the movie.
+- `year`: The release year.
+- `budget_cr`: Production budget in ₹ crore.
+- `worldwide_gross_cr`: Worldwide gross box office in ₹ crore.
+- `genre`: Primary genre (e.g., `Action`, `Comedy`, `Romance`, `Drama`, `Thriller`, `Horror-Comedy`).
+- `pct_recovered`: Recovery percentage (calculated as `worldwide_gross_cr / budget_cr * 100`).
+
+### 3. `biggest_losers.csv`
+- `film`: The title of the movie.
+- `year`: The release year.
+- `budget_cr`: Production budget in ₹ crore.
+- `worldwide_gross_cr`: Worldwide gross box office in ₹ crore.
+- `est_loss_cr`: Production budget minus worldwide gross (₹ crore).
+- `pct_recovered`: Percentage of budget recovered.
+- `pan_india`: Whether the film was a multi-lingual pan-India release (`yes`/`no`).
+
+---
+
 If you spot a figure you can source more precisely, corrections are welcome.
