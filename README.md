@@ -104,6 +104,20 @@ If you want to add a movie to the dataset (for example, to add it to the scatter
 - Budgets exclude marketing, which can cost as much again.
 - A few outliers (Dangal, Secret Superstar, Andhadhun) are lifted by huge runs in China.
 
+## Browser Compatibility
+
+This data story is built using modern web standards. It has been tested and verified across:
+- **Google Chrome** (v80+)
+- **Mozilla Firefox** (v75+)
+- **Apple Safari** (v13+)
+- **Microsoft Edge** (v80+)
+
+### Accessibility Design
+- **SVG Scaling**: Charts use SVG `viewBox` coordinates, resizing cleanly on mobile viewports.
+- **Prefers-Reduced-Motion**: Respects user browser preference setting `prefers-reduced-motion: reduce` by disabling bar-chart grow animations.
+- **Keyboard Navigation**: Buttons and toggle chips are semantic `<button>` tags with visible focus outlines (`focus-visible`) for screen readers and keyboard-only users.
+
+
 ## Credit
 
 Inspired by the Information Is Beautiful piece on the most successful Hollywood movie of all time. Box office figures lean heavily on the Ormax year end reports, with per film numbers cross checked across Wikipedia, Box Office India, Koimoi and Sacnilk.
