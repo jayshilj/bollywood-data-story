@@ -5,7 +5,12 @@
 Indian box office data is famously messy. Budgets and grosses are rarely audited, trade outlets disagree with each other, and "official" figures are sometimes closer to marketing than accounting. Everything here should be read as a careful estimate, not a final ledger.
 
 **Annual box office (Chart 1)**
-Gross collection figures come from the Ormax Box Office year end reports, which are the most credible public source for the Indian market. The all India totals for every year are taken directly from those reports. The Hindi cinema values for 2023, 2024 and 2025 are stated by Ormax. The 2019 and 2022 Hindi values are worked out from the language share percentages Ormax publishes. The 2020 and 2021 Hindi values are estimates that sit inside the sourced all India totals for those two pandemic years, where theatre closures make a clean split hard to find.
+Gross collection figures come from the Ormax Box Office year end reports, which are the most credible public source for the Indian market. The all India totals for every year are taken directly from those reports. The Hindi cinema values for 2023, 2024 and 2025 are stated by Ormax. 
+
+For 2019 and 2022, Ormax published precise language market share percentages (44% and 33% respectively) rather than absolute figures. The absolute Hindi box office values (₹4,800cr and ₹3,510cr) were derived by applying these percentages to the total All-India box office of those respective years (`All-India Total * Language Share / 100`).
+
+The 2020 and 2021 Hindi values are estimates that sit inside the sourced All-India totals for those two pandemic years, where theatre closures and partial runs make a clean, audited language split hard to compile from trade records.
+
 
 **Per film budgets and grosses (Charts 2 and 3)**
 These are pulled from the most widely cited public figures for each title, cross checked across Wikipedia, Box Office India, Koimoi and Sacnilk where possible. Worldwide gross is used throughout, not net India collections.
